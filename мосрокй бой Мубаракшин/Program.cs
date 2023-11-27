@@ -29,6 +29,7 @@ class Programs
 
 
             // Ход игрока
+            Console.WriteLine("ВВедите координаты. P.S Поле состоит из английских букв A, B, C, D, E, F, G, H, I, J и цифр от нуля 0 до 9 ");
             Console.WriteLine("Ваш ход. Введите координаты (например, A1):");
             string target = Console.ReadLine();
             bool playerHit = ProcessTurn(target, computerGrid);
@@ -308,20 +309,20 @@ class Programs
             grid[row, column] = 'X';
             Console.WriteLine("Попадание!");
 
-            // Check for adjacent targets and keep hitting them until missed
+            // Проверка наличия соседних палуб и продолжает поражать их, пока не промахнетесь
             while (true)
             {
                 bool hasAdjacentTarget = false;
                 if (column > 0 && grid[row, column - 1] == 'O') // Left
                 {
                     grid[row, column - 1] = 'X';
-                    Console.WriteLine("Компьютер добал попадание в соседнюю клетку слева!");
+                    Console.WriteLine("Компьютер добил попадание в соседнюю клетку слева!");
                     hasAdjacentTarget = true;
                 }
                 if (column < grid.GetLength(1) - 1 && grid[row, column + 1] == 'O') // Right
                 {
                     grid[row, column + 1] = 'X';
-                    Console.WriteLine("Компьютер добал попадание в соседнюю клетку справа!");
+                    Console.WriteLine("Компьютер добил попадание в соседнюю клетку справа!");
                     hasAdjacentTarget = true;
                 }
                 if (row > 0 && grid[row - 1, column] == 'O') // Up
