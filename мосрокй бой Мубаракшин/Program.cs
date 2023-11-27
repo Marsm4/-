@@ -29,7 +29,7 @@ class Programs
 
 
             // Ход игрока
-            
+
             Console.WriteLine("Ваш ход. Введите координаты (например, A1):");
             string target = Console.ReadLine();
             bool playerHit = ProcessTurn(target, computerGrid);
@@ -132,6 +132,8 @@ class Programs
     //    // Начало игры...
     //}
 
+
+    // Начало игры...
     static void PlaceShip(char[,] grid, int size)
     {
         Console.WriteLine("ВВедите координаты. P.S Поле состоит из английских букв A, B, C, D, E, F, G, H, I, J и цифр от нуля 0 до 9");
@@ -330,13 +332,13 @@ class Programs
                 if (row > 0 && grid[row - 1, column] == 'O') // Up
                 {
                     grid[row - 1, column] = 'X';
-                    Console.WriteLine("Компьютер добил / попадал в соседнюю клетку сверху!");
+                    Console.WriteLine("Компьютер добил / попал в соседнюю клетку сверху!");
                     hasAdjacentTarget = true;
                 }
                 if (row < grid.GetLength(0) - 1 && grid[row + 1, column] == 'O') // Down
                 {
                     grid[row + 1, column] = 'X';
-                    Console.WriteLine("Компьютер добил / попадал в соседнюю клетку снизу!");
+                    Console.WriteLine("Компьютер добил / попал в соседнюю клетку снизу!");
                     hasAdjacentTarget = true;
                 }
 
@@ -345,8 +347,7 @@ class Programs
                     break;
                 }
             }
-
-            // Проверька, не затонул ли весь корабль целиком
+            // Проверка, не затонул ли весь корабль целиком
             bool isShipSunk = true;
             for (int i = 0; i < grid.GetLength(0); i++)
             {
@@ -366,22 +367,22 @@ class Programs
 
             if (isShipSunk)
             {
-                //                                                              (т.е #####)
-                // Заполнение области вокруг затонувшего корабля символом "#"   (т.е #XXX#)
-                //                                                              (т.е #####)
-                for (int i = Math.Max(0, row - 1); i <= Math.Min(row + 1, grid.GetLength(0) - 1); i++)
+                for (int i = Math.Max(0, row - 1); i <= Math.Min(grid.GetLength(0) - 1, row + 1); i++)
                 {
-                    for (int j = Math.Max(0, column - 1); j <= Math.Min(column + 1, grid.GetLength(1) - 1); j++)
+                    for (int j = Math.Max(0, column - 1); j <= Math.Min(grid.GetLength(1) - 1, column + 1); j++)
                     {
-                        if (grid[i, j] == '*')
+                        if (grid[i, j] != 'X')
                         {
-                            grid[i, j] = '#';
+                            grid[i, j] = '@';
                         }
                     }
                 }
+        
 
-                // Если кораблҗ потоплен кораблҗ продолңает игру и начинает стрелять рандомно пока не ранет корабль, тогда цикл должен повтороиться
-                Console.WriteLine("Корабль потоплен!");
+    
+
+// Если корабль потоплен, компьютер продолжает игру и начинает стрелять рандомно пока не ранит корабль, тогда цикл должен повториться
+Console.WriteLine("Корабль потоплен!");
                 ResetGrid(grid);
             }
 
