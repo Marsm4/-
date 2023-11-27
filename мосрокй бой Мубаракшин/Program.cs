@@ -103,33 +103,33 @@ class Programs
         PlaceShip(grid, 1);
     }
 
-    static void Maina(string[] args)
-    {
-        InitializeGrids();
+    //static void Maina(string[] args)
+    //{
+    //    InitializeGrids();
 
-        // Расположение кораблей
-        Console.WriteLine("Выберите способ расстановки кораблей:");
-        Console.WriteLine("1. Рандомная расстановка");
-        Console.WriteLine("2. Ручная расстановка");
-        Console.Write("Введите номер способа: ");
-        string choice = Console.ReadLine();
+    //    // Расположение кораблей
+    //    Console.WriteLine("Выберите способ расстановки кораблей:");
+    //    Console.WriteLine("1. Рандомная расстановка");
+    //    Console.WriteLine("2. Ручная расстановка");
+    //    Console.Write("Введите номер способа: ");
+    //    string choice = Console.ReadLine();
 
-        if (choice == "1")
-        {
-            RandomlyPlaceShips(playerGrid);
-        }
-        else if (choice == "2")
-        {
-            ManuallyPlaceShips(playerGrid);
-        }
-        else
-        {
-            Console.WriteLine("Некорректный выбор. Используется рандомная расстановка.");
-            RandomlyPlaceShips(playerGrid);
-        }
+    //    if (choice == "1")
+    //    {
+    //        RandomlyPlaceShips(playerGrid);
+    //    }
+    //    else if (choice == "2")
+    //    {
+    //        ManuallyPlaceShips(playerGrid);
+    //    }
+    //    else
+    //    {
+    //        Console.WriteLine("Некорректный выбор. Используется рандомная расстановка.");
+    //        RandomlyPlaceShips(playerGrid);
+    //    }
 
-        // Начало игры...
-    }
+    //    // Начало игры...
+    //}
 
     static void PlaceShip(char[,] grid, int size)
     {
@@ -205,14 +205,14 @@ class Programs
 
         while (fourDeckCount > 0 || threeDeckCount > 0 || twoDeckCount > 0 || oneDeckCount > 0)
         {
-            // Generate random coordinates for the ship
+            //Генерирация случайных координат для корабля
             int x = random.Next(0, 10);
             int y = random.Next(0, 10);
 
-            // Randomly determine the orientation of the ship (horizontal or vertical)
+            // Случайным образом определяю ориентацию корабля (горизонтальную или вертикальную)
             bool isHorizontal = random.Next(2) == 0;
 
-            // Calculate the length of the ship based on its type
+            // Рассчитайте длину судна в зависимости от его типа
             int length = 0;
 
             if (fourDeckCount > 0)
@@ -236,17 +236,17 @@ class Programs
                 oneDeckCount--;
             }
 
-            // Check if the ship can be placed at the random coordinates and orientation
+            // Проверка, можно ли разместить корабль в произвольных координатах и ориентации
             if (CanPlaceShip(grid, x, y, length, isHorizontal))
             {
-                // Place the ship on the grid
+                // Поместщение корабля на сетку
                 PlaceShip(grid, x, y, length, isHorizontal);
             }
         }
     }
     static bool CanPlaceShip(char[,] grid, int x, int y, int length, bool isHorizontal)
     {
-        // Check if the ship is going out of bounds
+        // Проверка, не выходит ли корабль за пределы зоны
         if (isHorizontal && (x + length) > 10)
         {
             return false;
@@ -256,7 +256,7 @@ class Programs
             return false;
         }
 
-        // Check if there is already a ship at the specified coordinates
+        // Проверка, есть ли уже судно по указанным координатам
         for (int i = 0; i < length; i++)
         {
             if (isHorizontal && grid[x + i, y] == 'O')
@@ -274,7 +274,7 @@ class Programs
 
     static void PlaceShip(char[,] grid, int x, int y, int length, bool isHorizontal)
     {
-        // Place the ship on the grid
+        // Помещаю корабль на сетку
         for (int i = 0; i < length; i++)
         {
             if (isHorizontal)
@@ -327,13 +327,13 @@ class Programs
                 if (row > 0 && grid[row - 1, column] == 'O') // Up
                 {
                     grid[row - 1, column] = 'X';
-                    Console.WriteLine("Компьютер добал попадание в соседнюю клетку сверху!");
+                    Console.WriteLine("Компьютер добил / попадал в соседнюю клетку сверху!");
                     hasAdjacentTarget = true;
                 }
                 if (row < grid.GetLength(0) - 1 && grid[row + 1, column] == 'O') // Down
                 {
                     grid[row + 1, column] = 'X';
-                    Console.WriteLine("Компьютер добал попадание в соседнюю клетку снизу!");
+                    Console.WriteLine("Компьютер добил / попадал в соседнюю клетку снизу!");
                     hasAdjacentTarget = true;
                 }
 
@@ -343,7 +343,7 @@ class Programs
                 }
             }
 
-            // Check if the entire ship is sunk
+            // Проверька, не затонул ли весь корабль целиком
             bool isShipSunk = true;
             for (int i = 0; i < grid.GetLength(0); i++)
             {
@@ -363,7 +363,9 @@ class Programs
 
             if (isShipSunk)
             {
-                // Fill the area around the sunk ship with '#'
+                //                                                              (т.е #####)
+                // Заполнение области вокруг затонувшего корабля символом "#"   (т.е #XXX#)
+                //                                                              (т.е #####)
                 for (int i = Math.Max(0, row - 1); i <= Math.Min(row + 1, grid.GetLength(0) - 1); i++)
                 {
                     for (int j = Math.Max(0, column - 1); j <= Math.Min(column + 1, grid.GetLength(1) - 1); j++)
@@ -375,7 +377,7 @@ class Programs
                     }
                 }
 
-                // Reset the grid and start the loop again
+                // Если кораблҗ потоплен кораблҗ продолңает игру и начинает стрелять рандомно пока не ранет корабль, тогда цикл должен повтороиться
                 Console.WriteLine("Корабль потоплен!");
                 ResetGrid(grid);
             }
