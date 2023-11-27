@@ -29,7 +29,7 @@ class Programs
 
 
             // Ход игрока
-            Console.WriteLine("ВВедите координаты. P.S Поле состоит из английских букв A, B, C, D, E, F, G, H, I, J и цифр от нуля 0 до 9 ");
+            
             Console.WriteLine("Ваш ход. Введите координаты (например, A1):");
             string target = Console.ReadLine();
             bool playerHit = ProcessTurn(target, computerGrid);
@@ -134,7 +134,9 @@ class Programs
 
     static void PlaceShip(char[,] grid, int size)
     {
+        Console.WriteLine("ВВедите координаты. P.S Поле состоит из английских букв A, B, C, D, E, F, G, H, I, J и цифр от нуля 0 до 9");
         Console.WriteLine($"Расставьте корабль размером {size} клеток (например, A1 A2 A3):");
+  
         string input = Console.ReadLine();
         string[] coordinates = input.Split(' ');
 
