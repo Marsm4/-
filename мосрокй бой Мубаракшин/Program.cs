@@ -6,16 +6,32 @@ class Programs
     static char[,] playerGrid = new char[10, 10];
     static char[,] computerGrid = new char[10, 10];
 
+    
     static void Main(string[] args)
     {
         InitializeGrids();
+        Console.WriteLine("Выберите способ расстановки кораблей:");
+        Console.WriteLine("1. Рандомная расстановка");
+        Console.WriteLine("2. Ручная расстановка");
+        Console.Write("Введите номер способа: ");
+        string choice = Console.ReadLine();
+
+        if (choice == "1")
+        {
+            RandomlyPlaceShips(playerGrid);
+        }
+        else if (choice == "2")
+        {
+            ManuallyPlaceShips(playerGrid);
+        }
+
 
         // Расставляем корабли компьютера
         RandomlyPlaceShips(computerGrid);
 
-        // Расставляем корабли игрока
-        Console.WriteLine("Расставьте свои корабли.");
-        ManuallyPlaceShips(playerGrid);
+        //// Расставляем корабли игрока
+        //Console.WriteLine("Расставьте свои корабли.");
+        //ManuallyPlaceShips(playerGrid);
 
         // Начинаем игру
         while (true)
