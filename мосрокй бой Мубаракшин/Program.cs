@@ -24,6 +24,11 @@ class Programs
         {
             ManuallyPlaceShips(playerGrid);
         }
+        else
+        {
+            Console.WriteLine("Некорректный выбор. Используется ручная расстановка.");
+            ManuallyPlaceShips(playerGrid);
+        }
 
 
         // Расставляем корабли компьютера
@@ -117,7 +122,7 @@ class Programs
         PlaceShip(grid, 1);  // однопалубные
         PlaceShip(grid, 1);
         PlaceShip(grid, 1);
-        PlaceShip(grid, 1);
+        PlaceShip(grid, 1); 
     }
 
 
@@ -238,6 +243,7 @@ class Programs
             }
         }
     }
+
     static bool CanPlaceShip(char[,] grid, int x, int y, int length, bool isHorizontal)
     {
         // Проверка, не выходит ли корабль за пределы зоны
@@ -366,29 +372,29 @@ class Programs
                         }
                     }
                 }
-        
 
-    
 
-// Если корабль потоплен, компьютер продолжает игру и начинает стрелять рандомно пока не ранит корабль, тогда цикл должен повториться
-Console.WriteLine("Корабль потоплен!");
+
+
+                // Если корабль потоплен, компьютер продолжает игру и начинает стрелять рандомно пока не ранит корабль, тогда цикл должен повториться
+                Console.WriteLine("Корабль потоплен!");
                 ResetGrid(grid);
-            }
+            } 
 
             return true;
+            }
+            else if (grid[row, column] == '~')
+            {
+                grid[row, column] = '*';
+                Console.WriteLine("Промазал!");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Вы уже стреляли по этой клетке. Попробуйте еще раз.");
+                return false;
+            }
         }
-        else if (grid[row, column] == '~')
-        {
-            grid[row, column] = '*';
-            Console.WriteLine("Промазал!");
-            return false;
-        }
-        else
-        {
-            Console.WriteLine("Вы уже стреляли по этой клетке. Попробуйте еще раз.");
-            return false;
-        }
-    }
 
     static void ResetGrid(char[,] grid)
     {
