@@ -21,7 +21,7 @@ class Programs
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("==== Игра Морской бой ====");
+            Console.WriteLine("Игра Морской бой");
             Console.WriteLine("Компьютер:");
             DrawGrid(computerGrid, true);
             Console.WriteLine("Вы:");
@@ -104,33 +104,6 @@ class Programs
         PlaceShip(grid, 1);
     }
 
-    //static void Maina(string[] args)
-    //{
-    //    InitializeGrids();
-
-    //    // Расположение кораблей
-    //    Console.WriteLine("Выберите способ расстановки кораблей:");
-    //    Console.WriteLine("1. Рандомная расстановка");
-    //    Console.WriteLine("2. Ручная расстановка");
-    //    Console.Write("Введите номер способа: ");
-    //    string choice = Console.ReadLine();
-
-    //    if (choice == "1")
-    //    {
-    //        RandomlyPlaceShips(playerGrid);
-    //    }
-    //    else if (choice == "2")
-    //    {
-    //        ManuallyPlaceShips(playerGrid);
-    //    }
-    //    else
-    //    {
-    //        Console.WriteLine("Некорректный выбор. Используется рандомная расстановка.");
-    //        RandomlyPlaceShips(playerGrid);
-    //    }
-
-    //    // Начало игры...
-    //}
 
 
     // Начало игры...
