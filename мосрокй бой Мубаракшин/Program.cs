@@ -246,7 +246,6 @@ class Programs
 
     static bool CanPlaceShip(char[,] grid, int x, int y, int length, bool isHorizontal)
     {
-        // Проверка, не выходит ли корабль за пределы зоны
         if (isHorizontal && (x + length) > 10)
         {
             return false;
@@ -255,24 +254,28 @@ class Programs
         {
             return false;
         }
-
-        // Проверка, есть ли уже судно по указанным координатам
-        for (int i = 0; i < length; i++)
+        for (int i = -1; i <= length; i++)
         {
-            if (isHorizontal && grid[x + i, y] == 'O')
+            for (int j = -1; j <= 1; j++)
             {
-                return false;
-            }
-            else if (!isHorizontal && grid[x, y + i] == 'O')
-            {
-                return false;
+                int currentX = x + (isHorizontal ? i : j);
+                int currentY = y + (isHorizontal ? j : i);
+
+                if (currentX >= 0 && currentX < 10 && currentY >= 0 && currentY < 10)
+                {
+                    if (grid[currentX, currentY] == 'O')
+                    {
+                        return false;
+                    }
+                }
             }
         }
 
         return true;
     }
 
-    static void PlaceShip(char[,] grid, int x, int y, int length, bool isHorizontal)
+
+        static void PlaceShip(char[,] grid, int x, int y, int length, bool isHorizontal)
     {
         // Помещаю корабль на сетку
         for (int i = 0; i < length; i++)
